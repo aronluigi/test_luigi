@@ -1,0 +1,4 @@
+test_csv_import:
+    resource: "@TestCsvImportBundle/Resources/config/routing.yml"
+    prefix:   /
+
