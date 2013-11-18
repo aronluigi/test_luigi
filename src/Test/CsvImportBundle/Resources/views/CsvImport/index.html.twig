@@ -1,0 +1,39 @@
+{% extends 'TestCsvImportBundle::base.html.twig' %}
+
+{% block section %}
+    <div id="csvImportPage" class="container">
+        <div class="row">
+            <div class="span12">
+                <h2>Csv Import</h2>
+                <div class="csv-import-container">
+                    <h3>Import {{ csvFile.name }}</h3>
+                    <label for="csvMappingSelect">Use existing mapping: </label>
+                    <select id="csvMappingSelect">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+
+                    <script type="application/javascript">
+                        var mappingFields = {{ mappingFields|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
+                    </script>
+
+                    <input type="hidden" id="csvFilePath" value="{{ app.request.uriForPath('/uploads/documents/' ~ csvFile.path) }}">
+                    <div id="csvTable" data-js="csvTable"></div>
+
+                    <div class="import-actions">
+                        <input type="text" id="mappingName" placeholder="Mapping Name">
+                        <button class="save-import-btn btn btn-success">Save mapping & Import data</button>
+                        or
+                        <button class="import-btn btn btn-danger">Import without saving</button>
+
+                        <div class="pull-right progress progress-striped active">
+                            <div class="bar" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

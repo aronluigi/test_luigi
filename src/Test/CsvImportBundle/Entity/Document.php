@@ -29,6 +29,11 @@ class Document
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    public $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     public $path;
 
     /**
@@ -86,6 +91,7 @@ class Document
     public function preUpload()
     {
         if (null !== $this->getFile()) {
+            $this->name = $this->getFile()->getClientOriginalName();
             $filename = sha1(uniqid(mt_rand(), true));
             $this->path = $filename.'.csv';
         }
@@ -207,5 +213,28 @@ class Document
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Document
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

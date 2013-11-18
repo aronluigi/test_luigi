@@ -3450,7 +3450,7 @@ table th[class*="span"],
 }
 
 /* line 7, ../../../../../../../../Library/Ruby/Gems/1.8/gems/bootstrap-sass-2.3.2.2/vendor/assets/stylesheets/bootstrap/_wells.scss */
-.well, .form-upload, .upload-file-log {
+.well, .form-upload, .upload-file-log, #csvImportPage .csv-import-container {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
@@ -3464,13 +3464,13 @@ table th[class*="span"],
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 /* line 15, ../../../../../../../../Library/Ruby/Gems/1.8/gems/bootstrap-sass-2.3.2.2/vendor/assets/stylesheets/bootstrap/_wells.scss */
-.well blockquote, .form-upload blockquote, .upload-file-log blockquote {
+.well blockquote, .form-upload blockquote, .upload-file-log blockquote, #csvImportPage .csv-import-container blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
 }
 
 /* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/bootstrap-sass-2.3.2.2/vendor/assets/stylesheets/bootstrap/_wells.scss */
-.well-large, .form-upload, .upload-file-log {
+.well-large, .form-upload, .upload-file-log, #csvImportPage .csv-import-container {
   padding: 24px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -6840,4 +6840,51 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 /* line 10, ../../views/sass/partial/_upload_file_log.scss */
 .upload-file-log .table a, .upload-file-log .table a:hover {
   text-decoration: none;
+}
+
+/**
+* pages
+*/
+/* line 6, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container label {
+  display: inline-block;
+}
+/* line 10, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container select {
+  margin: 0;
+}
+/* line 14, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container #csvTable {
+  overflow: auto;
+  max-height: 350px;
+  margin-top: 10px;
+}
+/* line 19, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container #csvTable table {
+  font-size: 11.9px;
+  white-space: nowrap;
+}
+/* line 24, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container #csvTable table th select {
+  display: block;
+  font-size: 10.5px;
+  height: 20px;
+  width: auto;
+}
+/* line 32, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container #csvTable table form {
+  margin: 0px;
+}
+/* line 38, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container .import-actions {
+  margin-top: 20px;
+}
+/* line 41, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container .import-actions #mappingName {
+  margin: 0;
+}
+/* line 45, ../../views/sass/pages/_csv_import.scss */
+#csvImportPage .csv-import-container .import-actions .progress {
+  width: 400px;
+  margin: 3px 0 0 0;
 }

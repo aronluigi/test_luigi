@@ -1,3 +1,7 @@
 test_csv_import_homepage:
-    pattern:  /
-    defaults: { _controller: TestCsvImportBundle:Default:index }
+  pattern:  /
+  defaults: { _controller: TestCsvImportBundle:Default:index }
+
+test_csv_import_csv_import:
+  pattern: /csv/{csvId}
+  defaults: {_controller:  TestCsvImportBundle:CsvImport:index}

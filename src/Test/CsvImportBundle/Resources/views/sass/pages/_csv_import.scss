@@ -1,0 +1,51 @@
+#csvImportPage {
+  .csv-import-container {
+    @extend .well;
+    @extend .well-large;
+
+    label {
+      display: inline-block;
+    }
+
+    select {
+      margin: 0;
+    }
+
+    #csvTable {
+      overflow: auto;
+      max-height: 350px;
+      margin-top: $gridGutterWidth / 2;
+
+      table {
+        font-size: $fontSizeSmall;
+        white-space: nowrap;
+
+        th {
+          select {
+            display: block;
+            font-size: $fontSizeMini;
+            height: 20px;
+            width: auto;
+          }
+        }
+
+        form {
+          margin: 0px;
+        }
+      }
+    }
+
+    .import-actions {
+      margin-top: $gridGutterWidth;
+
+      #mappingName {
+        margin: 0;
+      }
+
+      .progress {
+        width: 400px;
+        margin: 3px 0 0 0;
+      }
+    }
+  }
+}

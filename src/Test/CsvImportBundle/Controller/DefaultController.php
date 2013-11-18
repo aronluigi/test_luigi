@@ -45,7 +45,7 @@ class DefaultController extends Controller
     {
         $log = $this->getDoctrine()
                 ->getRepository('TestCsvImportBundle:Document')
-                ->findAll();
+                ->findBy(array(), array('date' => 'DESC'));
 
         return $this->render('TestCsvImportBundle:Partial:upload-log.html.twig', array('fileLog' => $log));
     }
