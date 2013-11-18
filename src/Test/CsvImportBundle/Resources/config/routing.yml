@@ -1,0 +1,3 @@
+test_csv_import_homepage:
+    pattern:  /
+    defaults: { _controller: TestCsvImportBundle:Default:index }

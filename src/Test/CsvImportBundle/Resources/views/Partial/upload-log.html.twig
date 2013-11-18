@@ -1,0 +1,11 @@
+<div class="upload-file-log">
+    <table class="table table-striped">
+        {% for log in fileLog %}
+        <tr>
+            <td>{{ log.path }}</td>
+            <td>{{ log.date|date('d-m-Y H:i:s') }}</td>
+            <td><a href="{{ app.request.uriForPath('/uploads/documents/' ~ log.path) }}"><i class="icon-download"></i> Download</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

@@ -1,0 +1,7 @@
+parameters:
+#    test_csv_import.example.class: Test\CsvImportBundle\Example
+
+services:
+#    test_csv_import.example:
+#        class: %test_csv_import.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

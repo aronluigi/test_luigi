@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% stylesheets filter='cssrewrite' 'bundles/testcsvimport/css/*' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}">
+    {% endstylesheets %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<header>
+    {% include('TestCsvImportBundle:Partial:header.html.twig') %}
+</header>
+<section>
+    {% block section %}ss{% endblock %}
+</section>
+<footer>
+    {% block footer %}{% endblock %}
+</footer>
+</body>
+
+{#{% javascripts#}
+{#'bundles/xstorecore/themes/core/js/plugins/jquery-2.0.3.js'#}
+{#'bundles/xstorecore/themes/core/js/plugins/bootstrap.js'#}
+{#'bundles/xstorecore/themes/core/js/controller.js'#}
+{#'bundles/xstorecore/themes/core/js/header/category_tree.js'#}
+{#'bundles/xstorecore/themes/core/js/header/search.js'#}
+{#output="js/frontend.js" %}#}
+{#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+{#{% endjavascripts %}#}
+{#</html>#}

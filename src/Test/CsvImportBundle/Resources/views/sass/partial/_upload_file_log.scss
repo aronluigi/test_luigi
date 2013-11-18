@@ -1,0 +1,14 @@
+.upload-file-log {
+  @extend .well;
+  @extend .well-large;
+  max-height: 200px;
+  overflow: auto;
+
+  .table {
+    margin: 0;
+
+    a, a:hover {
+      text-decoration: none;
+    }
+  }
+}

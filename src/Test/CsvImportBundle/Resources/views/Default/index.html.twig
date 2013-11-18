@@ -1,0 +1,32 @@
+{% extends 'TestCsvImportBundle::base.html.twig' %}
+
+{% block section %}
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="form-upload">
+                    {{ form_start(form) }}
+                        {% if  form_errors(form.file) is not empty %}
+                            <div class="alert alert-error">
+                                {{ form_errors(form.file) }}
+                            </div>
+                        {% endif %}
+
+                        {% if alert is not null and form_errors(form.file) is empty %}
+                            <div class="alert alert-success">
+                                {{ alert }}
+                            </div>
+                        {% endif %}
+
+                        {{ form_widget(form.file) }}
+                        {{ form_widget(form.Upload) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+            <div class="span8">
+                {{ render(controller('TestCsvImportBundle:Default:showLog')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

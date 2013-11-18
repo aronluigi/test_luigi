@@ -1,0 +1,21 @@
+.form-upload {
+  @extend .well;
+  @extend .well-large;
+
+  form {
+    margin: 0;
+  }
+
+  .alert {
+    ul, li {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+  }
+
+  .file-upload-container {
+    line-height: 1em;
+    display: block;
+  }
+}
