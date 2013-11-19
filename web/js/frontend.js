@@ -21856,7 +21856,8 @@ Test.csvTable = {
         saveUrl: '/csv',
         totalRows: 0,
         mappingName: '#mappingName',
-        mappingTemplate: '#csvMappingSelect'
+        mappingTemplate: '#csvMappingSelect',
+        successAlert: '#successImport'
     },
 
     generateTable: function() {
@@ -21936,7 +21937,8 @@ Test.csvTable = {
         var mapping = this.getCurrentMapping(),
             tableRows = $(this.settings.container).find('tbody > tr'),
             data = {},
-            i = 0;
+            i = 0,
+            minOption = false;
 
         this.settings.totalRows = tableRows.length;
 
@@ -21949,6 +21951,7 @@ Test.csvTable = {
                     var cellNr = key + 1;
 
                     rowData[val] = $(thisRow).find('td:nth-child(' + cellNr + ')').html();
+                    minOption = true;
                 }
             });
 
@@ -21956,24 +21959,36 @@ Test.csvTable = {
             i++;
         });
 
+        if (minOption == false) {
+            return false;
+        }
+
         return data;
     },
 
 
     saveButtons: function() {
-        var that = this;
+        var that = this,
+            alert = $(this.settings.mappingName).parent().find('.alert');
+
+        alert.hide('fast');
 
         $(this.settings.saveImport).on('click', function() {
             var importData = that.getSaveImportData();
 
-            $.ajax({
-                url: that.settings.saveUrl,
-                type: "POST",
-                data: {'rowData': importData},
-                success: function (resposn) {
-                    console.log(resposn);
-                }
-            });
+            if (importData != false) {
+                $.ajax({
+                    url: that.settings.saveUrl,
+                    type: "POST",
+                    data: {'rowData': importData},
+                    success: function () {
+                        that.showSuccess();
+                    }
+                });
+            } else {
+                alert.html('Please select at least one mapping option!');
+                alert.show('fast');
+            }
         });
 
         $(this.settings.saveAndImport).on('click', function() {
@@ -21985,8 +22000,8 @@ Test.csvTable = {
                     url: that.settings.saveUrl,
                     type: "POST",
                     data: {'saveMapping': saveMappingData, 'rowData': importData},
-                    success: function (resposn) {
-                        console.log(resposn);
+                    success: function () {
+                        that.showSuccess();
                     }
                 });
             }
@@ -22043,6 +22058,14 @@ Test.csvTable = {
                 colName.parent().fadeOut('slow').fadeIn('slow');
             });
         });
+    },
+
+    showSuccess: function(){
+        var alert = $(this.settings.successAlert);
+        var container = $(this.settings.container).parent();
+
+        container.html('').append(alert);
+        container.find('.alert').show('fast');
     },
 
     //@TODO with this you can edit the table cells

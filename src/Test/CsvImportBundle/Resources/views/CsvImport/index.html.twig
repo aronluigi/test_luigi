@@ -5,6 +5,10 @@
         <div class="row">
             <div class="span12">
                 <h2>Csv Import</h2>
+                <div id="successImport" class="alert alert-success" style="display: none">
+                    Data import successful!
+                    <a href="/" class="btn btn-primary">Back to home</a>
+                </div>
                 <div class="csv-import-container">
                     <h3>Import {{ csvFile.name }}</h3>
                     <label for="csvMappingSelect">Use existing mapping: </label>
