@@ -12,9 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="order_items")
+ * @ORM\Table(name="orders_items")
  */
-class OrderItems
+class OrdersItems
 {
     /**
      * @ORM\Column(type="integer")
@@ -29,12 +29,12 @@ class OrderItems
     protected $param;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $qty;
 
     /**
-     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $price;
 

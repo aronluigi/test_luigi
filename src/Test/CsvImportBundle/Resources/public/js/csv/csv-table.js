@@ -9,7 +9,9 @@ Test.csvTable = {
         saveAndImport: '.save-import-btn',
         saveImport: '.import-btn',
         saveUrl: '/csv',
-        totalRows: 0
+        totalRows: 0,
+        mappingName: '#mappingName',
+        mappingTemplate: '#csvMappingSelect'
     },
 
     generateTable: function() {
@@ -125,10 +127,75 @@ Test.csvTable = {
                 data: {'rowData': importData},
                 success: function (resposn) {
                     console.log(resposn);
-                },
-                error: function(){
-
                 }
+            });
+        });
+
+        $(this.settings.saveAndImport).on('click', function() {
+            var importData = that.getSaveImportData();
+            var saveMappingData = that.getMappingForSave();
+
+            if (saveMappingData != false) {
+                $.ajax({
+                    url: that.settings.saveUrl,
+                    type: "POST",
+                    data: {'saveMapping': saveMappingData, 'rowData': importData},
+                    success: function (resposn) {
+                        console.log(resposn);
+                    }
+                });
+            }
+        });
+    },
+
+    getMappingForSave: function(){
+        var currentSelected = {};
+        var mappingSelects = $(this.settings.container).find('select option').filter(':selected');
+        var mappingName = $(this.settings.mappingName);
+        var alert = mappingName.parent().find('.alert');
+        alert.hide('fast');
+
+        if (mappingName.val().length != 0) {
+            var data = {};
+
+            mappingSelects.each(function(){
+                if ($(this).val() != 0) {
+                    var csvColName = $(this).closest('th').find('input[type=hidden]').val();
+                    if (csvColName.length != 0) {
+                        currentSelected[csvColName] = $(this).val();
+                    }
+                }
+            });
+
+            if (!$.isEmptyObject(currentSelected)) {
+                data[mappingName.val()] = currentSelected;
+                return data;
+            } else {
+                alert.html('Please select at least one mapping option!');
+                alert.show('fast');
+                return false;
+            }
+        } else {
+            alert.html('Please enter the mapping save name!');
+            alert.show('fast');
+            return false;
+        }
+
+    },
+
+    mappingTemplate: function(){
+        var that = this;
+
+        $(that.settings.mappingTemplate).on('change', function(){
+            $(that.settings.container).find('th select option[value="0"]').attr('selected', 'selected');
+            var mappingData = $.parseJSON($(this).val());
+
+            $.each(mappingData, function(col, mapping){
+                var colName = $(that.settings.container).find('th input[value=' + col + ']');
+                var selectMapping = colName.parent().find('select');
+
+                selectMapping.find('option[value=' + mapping + ']').attr('selected', 'selected');
+                colName.parent().fadeOut('slow').fadeIn('slow');
             });
         });
     },
@@ -153,5 +220,6 @@ Test.csvTable = {
     init: function() {
         this.generateTable();
         this.saveButtons();
+        this.mappingTemplate();
     }
 };

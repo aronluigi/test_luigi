@@ -9,10 +9,10 @@
                     <h3>Import {{ csvFile.name }}</h3>
                     <label for="csvMappingSelect">Use existing mapping: </label>
                     <select id="csvMappingSelect">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option value="0" selected>Select Mapping Template</option>
+                        {% for mappingTemplate in mapping %}
+                        <option value='{{ mappingTemplate.data|raw }}'>{{ mappingTemplate.name }}</option>
+                        {% endfor %}
                     </select>
 
                     <script type="application/javascript">
@@ -23,6 +23,7 @@
                     <div id="csvTable" data-js="csvTable"></div>
 
                     <div class="import-actions">
+                        <div class="alert alert-error" style="display: none"></div>
                         <input type="text" id="mappingName" placeholder="Mapping Name">
                         <button class="save-import-btn btn btn-success">Save mapping & Import data</button>
                         or
