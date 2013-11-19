@@ -10,6 +10,7 @@ namespace Test\CsvImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Test\CsvImportBundle\Entity\ImportModel;
+use Test\CsvImportBundle\Entity\OrdersData;
 
 class CsvImportController extends Controller
 {
@@ -25,5 +26,42 @@ class CsvImportController extends Controller
             'csvFile' => current($csvFile),
             'mappingFields' => $importMode->getFields()
         ));
+    }
+
+    public function saveAction()
+    {
+        $request = $this->getRequest();
+        $rowData = $request->get('rowData');
+        $saveMapping = $request->get('saveMaping');
+
+        if ($saveMapping) {
+            $mapping = $request->get('mapping');
+        }
+
+        if(!empty($rowData)) {
+
+            foreach ($rowData as $val) {
+                $order = new OrdersData();
+                $orderClassVars = get_class_vars(get_class($order));
+                unset($orderClassVars['id']);
+
+                $options = array_merge($orderClassVars, $val);
+
+                foreach ($options as $field => $value) {
+                    $methodName = 'set' . ucfirst($field);
+
+                    if (method_exists($order, $methodName)) {
+                        $code = '$order->' . $methodName . '("' . $value . '");';
+                        eval($code);
+                    }
+                }
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($order);
+                $em->flush();
+            }
+        }
+
+        exit;
     }
 }

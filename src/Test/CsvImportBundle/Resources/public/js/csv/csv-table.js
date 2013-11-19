@@ -7,7 +7,9 @@ Test.csvTable = {
         csvFilePath: '#csvFilePath',
         container: '#csvTable',
         saveAndImport: '.save-import-btn',
-        saveImport: '.import-btn'
+        saveImport: '.import-btn',
+        saveUrl: '/csv',
+        totalRows: 0
     },
 
     generateTable: function() {
@@ -83,16 +85,51 @@ Test.csvTable = {
         return currentSelected;
     },
 
-    saveImport: function() {
-        var mapping = this.getCurrentMapping();
+    getSaveImportData: function() {
+        var mapping = this.getCurrentMapping(),
+            tableRows = $(this.settings.container).find('tbody > tr'),
+            data = {},
+            i = 0;
 
-        console.log(mapping);
+        this.settings.totalRows = tableRows.length;
+
+        tableRows.each(function(){
+            var thisRow = this;
+            var rowData = {};
+
+            $.each(mapping, function(key, val){
+                if (val != 0) {
+                    var cellNr = key + 1;
+
+                    rowData[val] = $(thisRow).find('td:nth-child(' + cellNr + ')').html();
+                }
+            });
+
+            data['r' + i] = rowData;
+            i++;
+        });
+
+        return data;
     },
 
-    saveButtons: function(){
+
+    saveButtons: function() {
         var that = this;
+
         $(this.settings.saveImport).on('click', function() {
-            that.saveImport();
+            var importData = that.getSaveImportData();
+
+            $.ajax({
+                url: that.settings.saveUrl,
+                type: "POST",
+                data: {'rowData': importData},
+                success: function (resposn) {
+                    console.log(resposn);
+                },
+                error: function(){
+
+                }
+            });
         });
     },
 

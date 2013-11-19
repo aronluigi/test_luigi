@@ -21,6 +21,7 @@ class ImportModel implements ImportInterface
     public $company;
     public $street1;
     public $street2;
+    public $streetNr;
     public $zip;
     public $city;
     public $country;
@@ -35,8 +36,9 @@ class ImportModel implements ImportInterface
         'lastName' => 'Last Name',
         'email' => 'Email',
         'company' => 'Company',
-        'street1' => 'Street 1',
-        'street2' => 'Street 2',
+        'streetA' => 'Street 1',
+        'streetB' => 'Street 2',
+        'streetNr' => 'Street Nr',
         'zip' => 'Zip',
         'city' => 'City',
         'country' => 'Country',
