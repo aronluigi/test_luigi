@@ -50,10 +50,12 @@ Apache:
     </VirtualHost>
 
 3) Setup MySQL connection:
-Just edit the test_luigi/app/config/parameters.yml
+Just edit the
+### `test_luigi/app/config/parameters.yml`
 
 4) Startup the project
 Run the following commands in terminal:
+
     app/console doctrine:database:create
     app/console doctrine:schema:update --force
     app/console assets:install --symlink
