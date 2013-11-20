@@ -5,7 +5,7 @@ Ho to install
     127.0.0.1 www.test.loc
 
 2) Setup Apache or Nginx:
-- Nginx:
+Nginx:
     server {
         listen 80;
         server_name www.test.loc;
@@ -33,7 +33,7 @@ Ho to install
         }
     }
 
-- Apache:
+Apache:
     <VirtualHost *:80>
         ServerName domain.tld
         ServerAlias www.domain.tld
