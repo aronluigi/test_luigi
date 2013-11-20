@@ -28,5 +28,11 @@
                 {{ render(controller('TestCsvImportBundle:Default:showLog')) }}
             </div>
         </div>
+
+        <div class="row">
+            <div class="span12">
+                {% include('TestCsvImportBundle:Partial:orders-table.html.twig') %}
+            </div>
+        </div>
     </div>
 {% endblock %}

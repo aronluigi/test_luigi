@@ -73,7 +73,7 @@ class CsvImportController extends Controller
                     $methodName = 'set' . ucfirst($field);
 
                     if (method_exists($order, $methodName)) {
-                        $code = '$order->' . $methodName . '("' . $value . '");';
+                        $code = '$order->' . $methodName . '("' . addslashes($value) . '");';
                         eval($code);
                     }
                 }

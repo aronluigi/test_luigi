@@ -30,13 +30,41 @@ class DefaultController extends Controller
             $em->persist($document);
             $em->flush();
 
-            $alert = 'File saved';
+            return $this->redirect($this->generateUrl('test_csv_import_csv_import', array('csvId' => $document->getId())));
         }
+
+        $rep = $this->getDoctrine()->getRepository('TestCsvImportBundle:OrdersData');
+        $query = $rep->createQueryBuilder('e')
+                    ->select('
+                        e.id,
+                        e.orderId,
+                        e.orderNr,
+                        e.company,
+                        e.streetA,
+                        e.streetB,
+                        e.zip,
+                        e.city,
+                        e.country,
+                        i.qty,
+                        i.price,
+                        p.sku,
+                        p.productName,
+                        c.firstName,
+                        c.lastName,
+                        c.email,
+                        c.phone')
+                    ->leftJoin('TestCsvImportBundle:OrdersItems', 'i', 'WITH', 'i.param = e.id')
+                    ->leftJoin('TestCsvImportBundle:Product', 'p', 'WITH', 'p.param = e.id')
+                    ->leftJoin('TestCsvImportBundle:Customer', 'c', 'WITH', 'c.param = e.id')
+                    ->getQuery();
+
+        $ordersData = $query->getArrayResult();
 
         return $this->render('TestCsvImportBundle:Default:index.html.twig',
             array(
                 'form' => $form->createView(),
-                'alert' => $alert
+                'alert' => $alert,
+                'orders' => $ordersData
             )
         );
     }

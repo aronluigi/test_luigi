@@ -3,7 +3,7 @@
  */
 Test.csvTable = {
     settings: {
-        mapping: mappingFields,
+        mapping: {},
         csvFilePath: '#csvFilePath',
         container: '#csvTable',
         saveAndImport: '.save-import-btn',
@@ -210,6 +210,7 @@ Test.csvTable = {
                 var selectMapping = colName.parent().find('select');
 
                 selectMapping.find('option[value=' + mapping + ']').attr('selected', 'selected');
+                selectMapping.trigger('change');
                 colName.parent().fadeOut('slow').fadeIn('slow');
             });
         });
@@ -241,6 +242,7 @@ Test.csvTable = {
     },
 
     init: function() {
+        this.settings.mapping = mappingFields;
         this.generateTable();
         this.saveButtons();
         this.mappingTemplate();

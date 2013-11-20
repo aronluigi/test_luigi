@@ -21848,7 +21848,7 @@ $(document).ready(function() {
  */
 Test.csvTable = {
     settings: {
-        mapping: mappingFields,
+        mapping: {},
         csvFilePath: '#csvFilePath',
         container: '#csvTable',
         saveAndImport: '.save-import-btn',
@@ -22055,6 +22055,7 @@ Test.csvTable = {
                 var selectMapping = colName.parent().find('select');
 
                 selectMapping.find('option[value=' + mapping + ']').attr('selected', 'selected');
+                selectMapping.trigger('change');
                 colName.parent().fadeOut('slow').fadeIn('slow');
             });
         });
@@ -22086,8 +22087,28 @@ Test.csvTable = {
     },
 
     init: function() {
+        this.settings.mapping = mappingFields;
         this.generateTable();
         this.saveButtons();
         this.mappingTemplate();
+    }
+};
+/**
+ * Created by aronluigi on 20/11/13.
+ */
+Test.orderTable = {
+    settings: {
+        'table': '#ordersTable'
+    },
+
+    setDataTable: function(){
+        $(this.settings.table).dataTable({
+            "sScrollY": 250,
+            "sScrollX": "100%"
+        });
+    },
+
+    init: function(){
+        this.setDataTable();
     }
 };

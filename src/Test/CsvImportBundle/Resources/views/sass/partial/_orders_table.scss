@@ -1,0 +1,8 @@
+.orders-table {
+  @extend .well;
+  @extend .well-large;
+
+  #ordersTable {
+    font-size: $fontSizeSmall;
+  }
+}

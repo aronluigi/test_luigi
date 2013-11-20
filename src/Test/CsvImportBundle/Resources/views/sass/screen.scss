@@ -9,11 +9,13 @@
 @import "_bootstrap";
 @import "config/_variables_bootstrap";
 
+@import "plugins/_jquery_data_table";
 /**
 * partials
 */
 @import "partial/_form_upload";
 @import "partial/upload_file_log";
+@import "partial/_orders_table";
 
 /**
 * pages
