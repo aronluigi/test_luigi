@@ -2,7 +2,7 @@ Ho to install
 ========================
 
 1) In your hosts file add a domain:
-### `127.0.0.1 www.test.loc`
+`127.0.0.1 www.test.loc`
 
 2) Setup Apache or Nginx:
 Nginx:
@@ -50,10 +50,12 @@ Apache:
     </VirtualHost>
 
 3) Setup MySQL connection:
+
 Just edit the
 ### `test_luigi/app/config/parameters.yml`
 
 4) Startup the project
+
 Run the following commands in terminal:
 
     app/console doctrine:database:create
